@@ -30,3 +30,16 @@ jobs:
           echo ${{ secrets.SECRET_TOKEN }}
           echo "Trick to echo GitHub Actions Secret: "
           echo ${{secrets.SECRET_TOKEN}} | sed 's/./& /g'
+      - name: Step 2 - GitHub Action if statement (true)
+        env: 
+          WHO_TO_TRUST: ${{ secrets.SECRET_TOKEN }}
+        if: env.WHO_TO_TRUST == 'TrustNo1'
+        run: echo "I know what the secret token is!"
+        
+      - name: Step 3 - Conditiona GitHub Aciton (false)
+        shell: bash
+        env:
+          WHO_TO_TRUST: ${{ secrets.SECRET_TOKEN }}
+        if: env.WHO_TO_TRUST != 'TrustNobody'
+        run: echo "I was wrong thinking the GitHub secret was 'TrustNobody'!"
+          
